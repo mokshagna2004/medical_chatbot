@@ -6,11 +6,11 @@ from langchain.embeddings import HuggingFaceEmbeddings
 
 def create_or_load_vectorstore(qa_list, save_path="faiss_index"):
     if os.path.exists(os.path.join(save_path, "faiss_store.pkl")):
-        print("🔁 Loading saved FAISS index...")
+        print(" Loading saved FAISS index...")
         with open(os.path.join(save_path, "faiss_store.pkl"), "rb") as f:
             return pickle.load(f)
 
-    print("📊 Creating FAISS index from scratch...")
+    print(" Creating FAISS index from scratch...")
     texts = [item['question'] for item in qa_list]
     metadatas = [{"answer": item["answer"]} for item in qa_list]
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
